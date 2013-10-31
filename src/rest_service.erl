@@ -31,6 +31,7 @@
 -export([allowed_methods/2]).
 -export([resource_exists/2]).
 -export([delete_resource/2]).
+-export([allow_missing_post/2]).
 -export([content_types_provided/2]).
 -export([content_types_accepted/2]).
 
@@ -92,12 +93,15 @@ content_types_accepted(Req, Context) ->
           end,
     {CTA, Req1, Context}.
 
-
 -spec resource_exists(cowboy_req:req(), context()) ->
     {true | false, cowboy_req:req(), context()}.
 resource_exists(Req0, #context{store=Store}=Context) ->
     {RsrcID, Req1} = cowboy_req:binding(resource_id, Req0),
     {rest_service_store:is_key(Store, RsrcID), Req1, Context}.
+
+-spec allow_missing_post(cowboy_req:req(), context()) ->
+    {boolean(), cowboy_req:req(), context()}.
+allow_missing_post(Req, Context) -> {false, Req, Context}.
 
 -spec delete_resource(cowboy_req:req(), context()) ->
     {true | false, cowboy_req:req(), context()}.
