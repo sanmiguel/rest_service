@@ -1,0 +1,10 @@
+%%% -*- mode: erlang -*-
+
+{application, rest_service,
+    [{description,  "Simple cowboy-based REST web service"},
+    {vsn, "0.0.1"},
+    {modules, [ rest_service_app ]},
+    {registered, [] },
+    {env, []},
+    {applications, [ kernel, stdlib, crypto, ranch, cowboy]},
+    {mod, {rest_service_app, []}}]}.
