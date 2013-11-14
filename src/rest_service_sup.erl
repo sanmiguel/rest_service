@@ -83,7 +83,7 @@ init([]) ->
         [
          {"/resource/[:resource_id]", rest_service, []}
         ]}]),
-    RanchOptions = [{port, 8080}, {nodelay, true}],
+    RanchOptions = [{port, application:get_env(port, 8080)}, {nodelay, true}],
     CowboyEnv = [{env, [{dispatch, Dispatch},
                                             {max_keepalive, 100},
                                             {compress, false},
