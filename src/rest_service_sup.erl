@@ -83,7 +83,7 @@ init([]) ->
         [
          {"/resource/[:resource_id]", rest_service, []}
         ]}]),
-    RanchOptions = [{port, application:get_env(port, 8080)}, {nodelay, true}],
+    RanchOptions = [{port, application:get_env(rest_service, port, 8080)}, {nodelay, true}],
     CowboyEnv = [{env, [{dispatch, Dispatch},
                                             {max_keepalive, 100},
                                             {compress, false},
@@ -98,7 +98,7 @@ init([]) ->
           [
            ?CHILD(rest_service_store_sup, rest_service_store_sup, supervisor, []),
            ranch:child_spec(
-                 rest_service_store_8080, % Name
+                 rest_service, % Name
                  50, % Acceptor count
                  ranch_tcp, % transport method
                  RanchOptions, % ranch options
