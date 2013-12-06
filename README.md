@@ -6,22 +6,22 @@ Simple cowboy-based REST webservice
 
 Usage:
 
-    ```bash
+```bash
     $ rebar get-deps compile
-    ```
+``` 
 
 Start the service:
 
-    ```erlang
+```erlang
     1> [ application:start(A) || A <- [crypto, ranch, cowlib, cowboy] ].
     [ok,ok,ok,ok]
     2> application:start(rest_service).
     ok
-    ```
+```
 
 Interact with the service:
 
-    ```erlang
+```erlang
     1> inets:start().
     ok
     2> httpc:request(get, {"http://localhost:8080/resource/123", []}, [], []).
@@ -63,4 +63,4 @@ Interact with the service:
           {"content-length","0"},
           {"content-type","application/json"}],
          []}}
-    ```
+```
