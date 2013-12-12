@@ -1,4 +1,4 @@
-rest_service
+rest_service [![Build Status](https://travis-ci.org/sanmiguel/rest_service.png)](https://travis-ci.org/sanmiguel/rest_service)
 ============
 
 Simple cowboy-based REST webservice
