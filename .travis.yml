@@ -1,6 +1,7 @@
 language: erlang
 otp_release:
+  - R16B03
   - R16B02
   - R16B01
   - R16B
-script: rebar ct skip_deps=true
+script: rebar compile && rebar ct skip_deps=true
