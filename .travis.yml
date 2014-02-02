@@ -3,4 +3,4 @@ otp_release:
   - R16B02
   - R16B01
   - R16B
-script: make test
+script: rebar ct skip_deps=true
