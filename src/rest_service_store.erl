@@ -29,13 +29,12 @@
 
 %% API
 -export([start_link/0]).
--export([
-		 clean/1
-		 , list_keys/1
-         , append/3
-         , is_key/2
-         , fetch/2
-         , delete/2
+-export([ clean/1
+        , list_keys/1
+        , append/3
+        , is_key/2
+        , fetch/2
+        , delete/2
         ]).
 
 %% gen_server callbacks
