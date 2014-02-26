@@ -91,7 +91,6 @@ init([]) ->
                                             {max_header_name_length, 64},
                                             {max_header_value_length, 4096},
                                             {max_headers, 100},
-                                            {max_keepalive, 100},
                                             {max_request_line_length, 4096},
                                             {timeout, 30000}]}],
     {ok, {{one_for_one, 5, 10},
