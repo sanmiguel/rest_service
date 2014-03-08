@@ -39,11 +39,7 @@
 -export([display/2]).
 -export([store/2]).
 
--record(context, {
-          store :: pid()
-         }).
-
--type context() :: #context{}.
+-type context() :: #{ store => pid() }.
 
 %%
 %% Cowboy REST callbacks
@@ -56,7 +52,7 @@ init(_Transport, _Req, _Args) ->
     {ok, cowboy_req:req(), context()}.
 rest_init(Req, _Opts) ->
     StorePID = rest_service_store_sup:get_store(),
-    {ok, Req, #context{store=StorePID}}.
+    {ok, Req, #{store => StorePID}}.
 
 -spec known_methods(cowboy_req:req(), context()) ->
     {list(binary()), cowboy_req:req(), context()}.
@@ -95,7 +91,7 @@ content_types_accepted(Req, Context) ->
 
 -spec resource_exists(cowboy_req:req(), context()) ->
     {true | false, cowboy_req:req(), context()}.
-resource_exists(Req0, #context{store=Store}=Context) ->
+resource_exists(Req0, #{store := Store}=Context) ->
     {RsrcID, Req1} = cowboy_req:binding(resource_id, Req0),
     {rest_service_store:is_key(Store, RsrcID), Req1, Context}.
 
@@ -105,7 +101,7 @@ allow_missing_post(Req, Context) -> {false, Req, Context}.
 
 -spec delete_resource(cowboy_req:req(), context()) ->
     {true | false, cowboy_req:req(), context()}.
-delete_resource(Req0, #context{store=Store}=Context0) ->
+delete_resource(Req0, #{store := Store}=Context0) ->
     {RsrcID, Req1} = cowboy_req:binding(resource_id, Req0),
     rest_service_store:delete(Store, RsrcID),
     {true, Req1, Context0}.
@@ -113,7 +109,7 @@ delete_resource(Req0, #context{store=Store}=Context0) ->
 
 -spec display(cowboy_req:req(), context()) ->
     {Body :: binary(), cowboy_req:req(), context()}.
-display(Req0, #context{store=Store}=Context) ->
+display(Req0, #{store := Store}=Context) ->
 
     {RsrcID, Req1} = cowboy_req:binding(resource_id, Req0),
     Rsrc = rest_service_store:fetch(Store, RsrcID),
@@ -122,7 +118,7 @@ display(Req0, #context{store=Store}=Context) ->
 
 -spec store(cowboy_req:req(), context()) ->
     {Body :: binary(), cowboy_req:req(), context()}.
-store(Req0, #context{store=Store}=Context) ->
+store(Req0, #{store := Store}=Context) ->
     {RsrcID, Req1} = cowboy_req:binding(resource_id, Req0),
 
     {ok, Body, Req2} = cowboy_req:body(Req1),
