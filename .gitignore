@@ -1,2 +1,6 @@
 ebin
 deps
+_build
+logs
+**.beam
+tags
