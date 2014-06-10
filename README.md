@@ -7,12 +7,13 @@ Simple cowboy-based REST webservice
 Usage:
 
 ```bash
-    $ rebar get-deps compile
+    $ mix do deps.get, compile
 ``` 
 
 Start the service:
 
-```erlang
+```iex
+    $ mix -S iex
     1> [ application:start(A) || A <- [crypto, ranch, cowlib, cowboy] ].
     [ok,ok,ok,ok]
     2> application:start(rest_service).
