@@ -25,6 +25,7 @@ defmodule RestService.Mixfile do
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
     [{:cowboy, github: "extend/cowboy", tag: "0.9.0"},
-      {:proper, github: "manopapad/proper", tag: "master"}]
+      {:proper, github: "manopapad/proper", tag: "master"},
+      {:exrm, "~> 0.8.1"}]
   end
 end
