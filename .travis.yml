@@ -3,4 +3,4 @@ otp_release:
   - 17.1
   - R16B03-1
   - R16B02
-script: rebar compile && rebar skip_deps=true ct
+script: rebar compile && ./rebar skip_deps=true ct
