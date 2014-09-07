@@ -46,8 +46,8 @@ groups() ->
 %%% Overall setup/teardown
 %%%===================================================================
 init_per_suite(Config) ->
-    Apps = [ crypto, inets, ranch, cowlib, cowboy, rest_service ],
-    [ ok = application:start(A) || A <- Apps],
+    inets:start(),
+    {ok, Apps} = application:ensure_all_started(rest_service),
 
     [{apps, Apps} | Config].
 
@@ -55,6 +55,7 @@ end_per_suite(Config) ->
     Apps = lists:reverse(?config(apps, Config)),
     [ ok = application:stop(A) || A <- Apps ],
     ok.
+
 %%%===================================================================
 %%% Individual Test Cases (from groups() definition)
 %%%===================================================================
